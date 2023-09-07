@@ -1,0 +1,19 @@
+{
+  "name": "mern-tut",
+  "version": "1.0.0",
+  "description": "This is a MERN project in which authentication and authorization with roles and permissions performed.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server",
+    "dev": "nodemon server"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
