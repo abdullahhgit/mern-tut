@@ -1,9 +1,14 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const {logger} = require('./middleware/logger');
 const PORT = process.env.PORT || 3500;
 
-app.use('/', express.static(path.join(__dirname, '/public')));
+app.use(logger); // [logger in logger.js] Custom middleware that tracks the time and date and path where the User request on website.
+
+app.use(express.json());    // [express.json()] Built-in Middleware to make sure that your app accepts JSON data.
+
+app.use('/', express.static(path.join(__dirname, 'public'))); // [express.static()] Built-in Middleware for getting static file in your project.
 
 app.use('/', require('./routes/root'))
 
