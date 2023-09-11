@@ -2,10 +2,16 @@ require ('dotenv').config()
 const express = require('express');
 const app = express();
 const path = require('path');
-const {logger} = require('./middleware/logger');
+// const {logger} = require('./middleware/logger');
+const connectDB = require('./config/dbConn')
+const mongoose = require('mongoose')
+const {logger, logEvents} = require('./middleware/logger')
+
 const PORT = process.env.PORT || 3500;
 
 console.log(process.env.NODE_ENV);
+
+connectDB()
 
 app.use(logger); // [logger in logger.js] Custom middleware that tracks the time and date and path where the User request on website.
 
@@ -30,6 +36,13 @@ app.all('*', (req, res) => {    // if user enters invalid path returns 404 thriu
     }
 })
 
-app.listen(PORT, () => console.log(`Server running on Port ${PORT}`));
+mongoose.connection.once('open', () => {
+    console.log("Connected to MongoDB Successfully");
+    app.listen(PORT, () => console.log(`Server running on Port ${PORT}`));
+})
+
+mongoose.connection.on('error', err => {
+    console.log(err);
+})
 
 // app.get('/', (req, res) => res.send("Hello Mern Project"));
