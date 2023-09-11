@@ -1,8 +1,11 @@
+require ('dotenv').config()
 const express = require('express');
 const app = express();
 const path = require('path');
 const {logger} = require('./middleware/logger');
 const PORT = process.env.PORT || 3500;
+
+console.log(process.env.NODE_ENV);
 
 app.use(logger); // [logger in logger.js] Custom middleware that tracks the time and date and path where the User request on website.
 
