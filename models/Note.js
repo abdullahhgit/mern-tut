@@ -1,12 +1,13 @@
 const mongoose = require('mongoose');
+// const User = require('./User')
 
 const AutoIncrement = require('mongoose-sequence')(mongoose)
 
 const noteSchema = new mongoose.Schema({
-    username: {
+    user: {
         type: mongoose.Schema.Types.ObjectId,
         required: true,
-        ref: User,
+        ref: 'User'
     },
     title: {
         type: String,

@@ -21,6 +21,9 @@ app.use('/', express.static(path.join(__dirname, 'public'))); // [express.static
 
 app.use('/', require('./routes/root'))
 
+app.use('/users', require('./routes/userRoutes'))   // Route for user
+app.use('/notes', require('./routes/noteRoutes'))   // Route for Notes
+
 app.all('*', (req, res) => {    // if user enters invalid path returns 404 thriugh this method.
     res.status(404);
     if(req.accepts('html')) {
