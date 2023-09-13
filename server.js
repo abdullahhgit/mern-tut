@@ -2,6 +2,7 @@ require ('dotenv').config()
 const express = require('express');
 const app = express();
 const path = require('path');
+var cors = require('cors')
 // const {logger} = require('./middleware/logger');
 const connectDB = require('./config/dbConn')
 const mongoose = require('mongoose')
@@ -23,6 +24,8 @@ app.use('/', require('./routes/root'))
 
 app.use('/users', require('./routes/userRoutes'))   // Route for user
 app.use('/notes', require('./routes/noteRoutes'))   // Route for Notes
+
+app.use(cors());
 
 app.all('*', (req, res) => {    // if user enters invalid path returns 404 thriugh this method.
     res.status(404);
